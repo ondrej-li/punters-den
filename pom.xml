@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>any</groupId>
-    <artifactId>clojure-maven-war-example</artifactId>
+    <groupId>uk.co.puntersdan</groupId>
+    <artifactId>web</artifactId>
     <version>1.0</version>
-    <name>clojure-maven-war-example</name>
-    <url>http://maven.apache.org</url>
+    <name>punter's den web module</name>
+    <url>http://puntersden.co.uk</url>
     <dependencies>
         <dependency>
             <groupId>org.clojure</groupId>
@@ -114,7 +114,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
         </repository>
     </repositories>
     <build>
-        <finalName>war-example</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
