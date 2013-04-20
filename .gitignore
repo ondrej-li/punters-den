@@ -4,3 +4,4 @@
 /targets/
 .lein-deps-sum
 .c9revisions
+.idea

@@ -1,10 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>uk.co.puntersdan</groupId>
+    <groupId>uk.co.punters-den</groupId>
     <artifactId>web</artifactId>
     <version>1.0</version>
     <name>punter's den web module</name>
+    <packaging>war</packaging>
     <url>http://puntersden.co.uk</url>
     <dependencies>
         <dependency>
@@ -106,6 +107,16 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
             <version>1.0.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.flyway</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.24</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
@@ -114,6 +125,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
         </repository>
     </repositories>
     <build>
+        <finalName>punters-den</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
