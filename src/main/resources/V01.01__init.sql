@@ -1,9 +1,12 @@
 create table user (
-    id numeric primary key,
-    username varchar (255),
-    password varchar (255),
-    email varchar (255),
-    status varchar (32),
-    last_login datetime,
-    last_password_change datetime
-)
+    id numeric primary key not null auto_increment,
+    username varchar (255) not null,
+    password varchar (255) not null,
+    email varchar (255) not null,
+    status varchar (32) not null,
+    last_login datetime null,
+    last_password_change datetime null
+);
+
+insert into user (username, password, email, status)
+values ('admin', 'Janeka1974', 'ondrej.linek@gmail.com', 'open');

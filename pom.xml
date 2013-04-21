@@ -194,16 +194,16 @@
                 <version>2.14.1</version>
                 <configuration>
                     <environmentVariables>
-                        <CLEARDB_DATABASE_URL>mysql://b09319f594b2a1:935ee425@us-cdbr-east-03.cleardb.com/heroku_c388e160fbabe96?reconnect=true</CLEARDB_DATABASE_URL>
+                        <CLEARDB_DATABASE_URL>mysql://punter:Janeka1974@localhost/punter</CLEARDB_DATABASE_URL>
                     </environmentVariables>
-                    <forkMode>always</forkMode>
+                    <forkCount>3</forkCount>
                     <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.3</version>
+                <version>2.4</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
