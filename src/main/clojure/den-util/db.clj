@@ -8,18 +8,24 @@
 [ clojure.java.jdbc : as sql ]
 [ compojure.route : as route ] ) )
 
+;URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+ ;
+ ;        String username = dbUri.getUserInfo().split(":")[0];
+ ;        String password = dbUri.getUserInfo().split(":")[1];
+ ;        String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
+
+
 ( def db-config
-{ : classname "com.mysql.jdbc.Driver"
-: subprotocol "h2"
-: subname "mem:documents"
-: user "punter"
-: password "Janeka1974" } )
+     { : classname "com.mysql.jdbc.Driver"
+     : protocol "CLEARDB_DATABASE_URL"
+     : user "punter"
+     : password "Janeka1974" } )
 
 ( defn pool
 [ config ]
 ( let [ cpds ( doto ( ComboPooledDataSource. )
       ( .setDriverClass ( : classname config ) )
-      ( .setJdbcUrl ( str "jdbc:" ( : subprotocol config ) ":" ( : subname config ) ) )
+      ( .setJdbcUrl ( str "jdbc:" ) )
       ( .setUser ( : user config ) )
       ( .setPassword ( : password config ) )
       ( .setMaxPoolSize 6 )

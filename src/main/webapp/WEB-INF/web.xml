@@ -34,6 +34,11 @@
          <param-value>simple.core/app</param-value>
       </init-param>
    </servlet>
+    <servlet>
+        <servlet-name>init-servlet</servlet-name>
+        <servlet-class>punters_den.web.StartupServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
    <servlet-mapping>
       <servlet-name>api-servlet</servlet-name>
       <url-pattern>/*</url-pattern>
