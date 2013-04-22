@@ -13,4 +13,12 @@ public class Factory {
         dataSource.setURL(Configuration.getDatabaseJdbcUrl());
         return dataSource;
     }
+//    (let [cpds (doto (ComboPooledDataSource.)
+//    (.setDriverClass (:classname config))
+//            (.setJdbcUrl (str "jdbc:" (:subprotocol config) ":" (:subname config)))
+//            (.setUser (:user config))
+//            (.setPassword (:password config))
+//            (.setMaxPoolSize 6)
+//            (.setMinPoolSize 1)
+//            (.setInitialPoolSize 1))]
 }
