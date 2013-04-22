@@ -1,5 +1,5 @@
 (ns simple.dev.start-jetty-server
-  (:require simple.core
+  (:require punters-den.core
             [lein-reload.util.tracker :as tracker]
             [clojure.java.io :as io]
             [robert.hooke :as hooke]

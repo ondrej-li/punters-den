@@ -1,31 +1,28 @@
 package punters_den.util;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import javax.sql.DataSource;
 
 import javax.sql.DataSource;
 
 public class Factory {
-    private static final volatile DataSource DATASOURCE;
+    private static volatile DataSource DATA_SOURCE;
     
     
-    public static DataSource getDataSource() {
-        if (DATASOURCE == null) {
+    public static DataSource getDataSource() throws Exception {
+        if (DATA_SOURCE == null) {
             synchronized (Factory.class) {        
-                if (DATASOURCE == null) {
-                    ComboPooledDataSource DATASOURCE = new ComboPooledDataSource();        
-                    DATASOURCE.setUser(Configuration.getDatabaseUsername());
-                    DATASOURCE.setPassword(Configuration.getDatabasePassword());
-                    DATASOURCE.setJdbcUrl(Configuration.getDatabaseJdbcUrl());
-                    DATASOURCE.setDriverClass ("com.mysql.jdbc.Driver");
-                    DATASOURCE.setMaxPoolSize(50);
-                    DATASOURCE.setMinPoolSize(5);
-                    DATASOURCE.setMinPoolSize(5);
+                if (DATA_SOURCE == null) {
+                    DATA_SOURCE = new ComboPooledDataSource();
+                    ((ComboPooledDataSource) DATA_SOURCE).setUser(Configuration.getDatabaseUsername());
+                    ((ComboPooledDataSource) DATA_SOURCE).setPassword(Configuration.getDatabasePassword());
+                    ((ComboPooledDataSource) DATA_SOURCE).setJdbcUrl(Configuration.getDatabaseJdbcUrl());
+                    ((ComboPooledDataSource) DATA_SOURCE).setDriverClass("com.mysql.jdbc.Driver");
+                    ((ComboPooledDataSource) DATA_SOURCE).setMaxPoolSize(50);
+                    ((ComboPooledDataSource) DATA_SOURCE).setMinPoolSize(5);
+                    ((ComboPooledDataSource) DATA_SOURCE).setMinPoolSize(5);
                 }
             }
         }
-        return DATASOURCE;        
+        return DATA_SOURCE;
     }
 }

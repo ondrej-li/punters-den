@@ -20,7 +20,11 @@ public class StartupServlet extends HttpServlet {
 
     private void initializeDatabase() {
         Flyway flyway = new Flyway();
-        flyway.setDataSource(Factory.getDataSource());
+        try {
+            flyway.setDataSource(Factory.getDataSource());
+        } catch (Exception e) {
+            logger.error("Error getting datasource.", e);
+        }
         flyway.setLocations("db");
         try {
             flyway.init();
@@ -30,12 +34,12 @@ public class StartupServlet extends HttpServlet {
         try {
             flyway.repair();
         } catch (FlywayException e) {
-            logger.debug ("Error repairing database - is database already repaired?", e);
+            logger.debug("Error repairing database - is database already repaired?", e);
         }
         try {
             flyway.migrate();
         } catch (FlywayException e) {
-            logger.warn ("Failed migrating database - trying to fix.");
+            logger.warn("Failed migrating database - trying to fix.");
         }
     }
 }

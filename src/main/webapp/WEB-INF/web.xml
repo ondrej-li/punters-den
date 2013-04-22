@@ -31,7 +31,7 @@
       <servlet-class>org.lpetit.ring.servlet.RingHttpServlet</servlet-class>
       <init-param>
          <param-name>handler</param-name>
-         <param-value>simple.core/app</param-value>
+         <param-value>punters-den.core/app</param-value>
       </init-param>
    </servlet>
     <servlet>
