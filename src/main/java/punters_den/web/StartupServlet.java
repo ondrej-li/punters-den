@@ -25,8 +25,17 @@ public class StartupServlet extends HttpServlet {
         try {
             flyway.init();
         } catch (FlywayException e) {
-            logger.warn("Error initializing database - is database already initialized?", e);
+            logger.debug("Error initializing database - is database already initialized?", e);
         }
-        flyway.migrate();
+        try {
+            flyway.repair();
+        } catch (FlywayException e) {
+            logger.debug ("Error repairing database - is database already repaired?", e);
+        }
+        try {
+            flyway.migrate();
+        } catch (FlywayException e) {
+            logger.warn ("Failed migrating database - trying to fix.");
+        }
     }
 }
