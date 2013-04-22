@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>uk.co.punters-den</groupId>
     <artifactId>web</artifactId>
-    <version>1.0</version>
+    <version>0.0.9</version>
     <name>punter's den web module</name>
     <packaging>war</packaging>
     <url>http://puntersden.co.uk</url>
