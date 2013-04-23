@@ -1,12 +1,10 @@
 (ns punters-den.core-test
-  (:require [punters-den.core :as sc])
-  (:use clojure.test
-        [ring.mock.request :only [request header]]
-        [midje.sweet :only [facts contains defchecker]]))
+    (:require [punters-den.core :as pc])
+    (:use clojure.test)
+    (:use [ring.mock.request :only [request header]])
+    (:use test.checkers)
+    (:use midje.sweet))
 
-(defchecker is-status [code]
-  (contains {:status code}))
-
-(deftest status (facts "Simple test"
-           (let [response (sc/app (request :get "/user/login/" {:username "smith" :password "agent"}))]
+(deftest status (facts "login-test"
+           (let [response (pc/app (request :get "/user/login/" {:username "smith" :password "agent"}))]
              response => (is-status 200))))

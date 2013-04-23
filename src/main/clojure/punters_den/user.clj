@@ -1,7 +1,7 @@
 (ns punters-den.user
-    (:use       [compojure.core]
-                [clojure.tools.logging :only (info error)]
-                [ring.util.response])
+    (:use compojure.core)
+    (:use [clojure.tools.logging :only [info error]])
+    (:use ring.util.response)
     (:require   [compojure.route :as route]
                 [clojure.java.jdbc :as sql]
                 [compojure.handler :as handler]))
