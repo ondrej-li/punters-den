@@ -1,9 +1,10 @@
 (ns punters-den.user
-    (:use compojure.core
-        [clojure.tools.logging :only [info warn error]]
-        ring.util.response)
-    (:require [compojure.route :as route]
-        [compojure.handler :as handler]))
+    (:use       [compojure.core]
+                [clojure.tools.logging :only (info error)]
+                [ring.util.response])
+    (:require   [compojure.route :as route]
+                [clojure.java.jdbc :as sql]
+                [compojure.handler :as handler]))
 
 (defn authenticate-user [username password]
     (info "authenticate-user called")
