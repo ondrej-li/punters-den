@@ -1,12 +1,14 @@
 (ns punters-den.user
     (:use compojure.core
-        [clojure.tools.logging :only [info]])
+        [clojure.tools.logging :only [info warn error]]
+        ring.util.response)
     (:require [compojure.route :as route]
         [compojure.handler :as handler]))
 
 (defn authenticate-user [username password]
-    {:status "OK" :key "123456789"})
+    (info "authenticate-user called")
+    (response {:status "OK" :key "123456789"}))
 
 (defroutes login-routes
-    (PUT    "/" [username password] (authenticate-user username password)))
+    (GET    "/" [username password] (authenticate-user username password)))
 

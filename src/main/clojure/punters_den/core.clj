@@ -1,7 +1,8 @@
 (ns punters-den.core
     (:use compojure.core
-        [clojure.tools.logging :only [info]]
-        punters-den.user)
+        [clojure.tools.logging :only [info]])
+    (:use punters-den.user)
+    (:use ring.util.response)
     (:require [compojure.handler :as handler]
         [ring.middleware.json :as middleware]
         [clojure.java.jdbc :as sql]

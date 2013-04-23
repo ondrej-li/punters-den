@@ -8,5 +8,5 @@
   (contains {:status code}))
 
 (deftest status (facts "Simple test"
-           (let [response (sc/app (request :post "/punters-den/user" :body {:username "smith" :password "agent"}))]
+           (let [response (sc/app (request :get "/user/login/" {:username "smith" :password "agent"}))]
              response => (is-status 200))))
