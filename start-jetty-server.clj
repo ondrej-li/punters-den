@@ -18,7 +18,7 @@
 
 (org.springframework.util.Log4jConfigurer/initLogging log-file 20000)
 
-(defonce server (run-jetty (wrap-stacktrace (wrap-reload-modified #'simple.core/app ["src/main/clojure"])) {:port 8080 :join? false}))
+(defonce server (run-jetty (wrap-stacktrace (wrap-reload-modified #'punters-den.core/app ["src/main/clojure"])) {:port 5000 :join? false}))
 
 (defn stop []
   (.stop server))

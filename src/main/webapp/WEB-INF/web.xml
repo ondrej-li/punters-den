@@ -3,14 +3,14 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-   <display-name>Simple Clojure WebApp</display-name>
+   <display-name>Punters Den API app</display-name>
    <context-param>
       <param-name>context-init</param-name>
-      <param-value>simple.core/start</param-value>
+      <param-value>punters-den.core/start</param-value>
    </context-param>
    <context-param>
       <param-name>context-destroy</param-name>
-      <param-value>simple.core/stop</param-value>
+      <param-value>punters-den.core/stop</param-value>
    </context-param>
    <context-param>
     <param-name>log4jRefreshInterval</param-name>
@@ -41,6 +41,6 @@
     </servlet>
    <servlet-mapping>
       <servlet-name>api-servlet</servlet-name>
-      <url-pattern>/api/*</url-pattern>
+      <url-pattern>/*</url-pattern>
    </servlet-mapping>
 </web-app>

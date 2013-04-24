@@ -7,7 +7,7 @@
     (:use midje.sweet))
 
 (deftest status (fact "login-test"
-           (let [response (pc/app (request :get "/user/login/" {:username "smith" :password "agent"}))]
+           (let [response (pc/app (request :get "/api/user/login/" {:username "smith" :password "agent"}))]
            (pp/pprint response)
            response => OK
            (response :body) => "{\"status\":\"OK\",\"key\":\"123456789\"}")))
