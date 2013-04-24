@@ -13,8 +13,8 @@
 
 (defroutes app-routes
     (context "/user/login" [] login-routes)
-;    (context "/" [] (defroutes status-routes (
-;        OPTION "/" [] (report-status))))
+    (context "/" [] (defroutes status-routes (
+        OPTIONS "/" [] (report-status))))
     (route/files "/public")
     (route/not-found "Not Found"))
 
