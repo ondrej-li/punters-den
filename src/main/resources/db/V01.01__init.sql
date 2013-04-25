@@ -6,6 +6,8 @@ create table user (
     status varchar (32) not null,
     last_login datetime null,
     last_password_change datetime null,
+    auth_key varchar (255) null,
+    verification_key (255) null,
     primary key (id)
 );
 
