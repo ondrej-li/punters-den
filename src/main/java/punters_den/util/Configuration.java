@@ -35,16 +35,16 @@ public class Configuration {
         }
     }
 
-    private static ConfigurationHolder currentConfiguration = buildConfiguration();
+    private static ConfigurationHolder currentConfiguration;
 
     static {
-        buildConfiguration();
+        resetConfiguration();
     }
 
     public static synchronized ConfigurationHolder buildConfiguration() {
         try {
             ConfigurationHolder holder = new ConfigurationHolder();
-            URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+            URI dbUri = new URI(System.getProperty("CLEARDB_DATABASE_URL", System.getenv("CLEARDB_DATABASE_URL")));
             holder.setDatabaseUsername(dbUri.getUserInfo().split(":")[0]);
             holder.setDatabasePassword(dbUri.getUserInfo().split(":")[1]);
             holder.setDatabaseJdbcUrl("jdbc:mysql://" + dbUri.getHost() + dbUri.getPath() + (dbUri.getQuery() != null ? "?" + dbUri.getQuery() : ""));
@@ -52,6 +52,10 @@ public class Configuration {
         } catch (URISyntaxException e) {
             return null;
         }
+    }
+
+    public static void resetConfiguration() {
+        currentConfiguration = buildConfiguration();
     }
 
     public static String getDatabaseUsername() {
@@ -64,5 +68,17 @@ public class Configuration {
 
     public static String getDatabaseJdbcUrl() {
         return currentConfiguration.getDatabaseJdbcUrl();
+    }
+
+    public static void setDatabaseUsername(String username) {
+        currentConfiguration.setDatabaseUsername(username);
+    }
+
+    public static void setDatabasePassword(String password) {
+        currentConfiguration.setDatabasePassword(password);
+    }
+
+    public static void setDatabaseJdbcUrl(String url) {
+        currentConfiguration.setDatabaseJdbcUrl(url);
     }
 }

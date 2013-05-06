@@ -6,11 +6,11 @@ import javax.sql.DataSource;
 
 public class Factory {
     private static volatile DataSource DATA_SOURCE;
-    
-    
+
+
     public static DataSource getDataSource() throws Exception {
         if (DATA_SOURCE == null) {
-            synchronized (Factory.class) {        
+            synchronized (Factory.class) {
                 if (DATA_SOURCE == null) {
                     DATA_SOURCE = new ComboPooledDataSource();
                     ((ComboPooledDataSource) DATA_SOURCE).setUser(Configuration.getDatabaseUsername());
@@ -24,5 +24,10 @@ public class Factory {
             }
         }
         return DATA_SOURCE;
+    }
+
+    public static void resetDataSource() {
+        DATA_SOURCE = null;
+        return;
     }
 }

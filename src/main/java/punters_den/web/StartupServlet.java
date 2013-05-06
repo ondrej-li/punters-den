@@ -1,9 +1,9 @@
 package punters_den.web;
 
-import com.googlecode.flyway.core.Flyway;
-import com.googlecode.flyway.core.api.FlywayException;
 import org.apache.log4j.Logger;
+import punters_den.util.Configuration;
 import punters_den.util.Factory;
+import punters_den.util.FlywayService;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,31 +15,16 @@ public class StartupServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        this.initializeDatabase();
+        try {
+            this.initializeDatabase();
+        } catch (Exception e) {
+            throw new ServletException("Exception during database init.", e);
+        }
     }
 
-    private void initializeDatabase() {
-        Flyway flyway = new Flyway();
-        try {
-            flyway.setDataSource(Factory.getDataSource());
-        } catch (Exception e) {
-            logger.error("Error getting datasource.", e);
-        }
-        flyway.setLocations("db");
-        try {
-            flyway.init();
-        } catch (FlywayException e) {
-            logger.debug("Error initializing database - is database already initialized?", e);
-        }
-        try {
-            flyway.repair();
-        } catch (FlywayException e) {
-            logger.debug("Error repairing database - is database already repaired?", e);
-        }
-        try {
-            flyway.migrate();
-        } catch (FlywayException e) {
-            logger.warn("Failed migrating database - trying to fix.");
-        }
+    private void initializeDatabase() throws Exception {
+        Configuration.resetConfiguration();
+        Factory.resetDataSource();
+        FlywayService.initializeDatabase(Factory.getDataSource(), null);
     }
 }
