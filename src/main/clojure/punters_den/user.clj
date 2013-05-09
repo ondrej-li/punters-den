@@ -54,15 +54,15 @@
     (cond
       (not= user nil) (update-auth-key username auth-key)
       :else (throw (Exception. "unknown username/password")))
-    (assoc-in (response {:outcome "OK"}) [:header :cookies :auth-key ] auth-key)))
+    (assoc-in (response {:outcome "OK" :auth-key auth-key}) [:header :cookies :auth-key ] auth-key)))
 
 (defn logout-user []
   (info "logout-user called")
   (assoc-in (response {:outcome "OK"}) [:header :cookies :auth-key ] nil))
 
 (defroutes user-routes
-  (GET "/login" [username password] (login-user username password))
-  (GET "/logout" [] (logout-user))
+  (GET "/:username/login" [username password] (login-user username password))
+  (GET "/:username/logout" [_] (logout-user))
   ;(POST "/" [username password] (create-user username password))
   ;(GET "/[:id]" [id] (user-by-id id))
   ;(PUT "/[:id]" [id] (update-user-by-id id password))

@@ -22,7 +22,7 @@
   (fact "login-test"
     (let [_ (delete-dummy-user)
           _ (create-dummy-user)
-          response (pc/app (request :get "/api/user/login" {:username "smith" :password "agent"}))
+          response (pc/app (request :get "/api/user/smith/login" {:password "agent"}))
           _ (delete-dummy-user)]
       (pp/pprint response)
       response => OK)))

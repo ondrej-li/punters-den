@@ -16,8 +16,9 @@
 
 (defroutes app-routes
   (context "/api/user" [] user-routes)
-  (context "/" [] (defroutes status-routes (
-                                             OPTIONS "/" [] (report-status))))
+  (context "/" []
+    (defroutes status-routes
+      (OPTIONS "/" [] (report-status))))
   (route/files "/public")
   (route/not-found "Not Found"))
 
