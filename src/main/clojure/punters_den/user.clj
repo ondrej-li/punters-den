@@ -54,11 +54,10 @@
     (cond
       (not= user nil) (update-auth-key username auth-key)
       :else (throw (Exception. "unknown username/password")))
-    (assoc-in (response {:outcome "OK" :auth-key auth-key}) [:header :cookies :auth-key ] auth-key)))
+    (response (merge {:outcome "OK" :auth-key auth-key} user))))
 
 (defn logout-user []
-  (info "logout-user called")
-  (assoc-in (response {:outcome "OK"}) [:header :cookies :auth-key ] nil))
+  (info "logout-user called"))
 
 (defroutes user-routes
   (GET "/:username/login" [username password] (login-user username password))

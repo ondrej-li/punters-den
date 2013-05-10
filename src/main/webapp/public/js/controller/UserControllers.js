@@ -6,6 +6,7 @@ function LoginCtrl($scope, $location, UserComm, localStorageService) {
             function (r) {
                 console.log('status:' + r.outcome);
                 localStorageService.cookie.add('auth-key', r['auth-key']);
+                $scope.$emit('login', [r]);
                 $location.url('/');
             },
             function (r) {

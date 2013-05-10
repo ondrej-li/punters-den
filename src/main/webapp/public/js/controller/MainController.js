@@ -1,9 +1,11 @@
 function MainCtrl($scope, $location, UserComm, localStorageService) {
+    $scope.user = null;
     $scope.logoutClicked = function () {
         UserComm.logout(
-            {username: $scope.login.username},
+            {username: $scope.user.username},
             function (r) {
                 console.log('status:' + r.outcome);
+                $scope.user = null;
                 localStorageService.cookie.remove('auth-key');
                 $location.url("/");
             },
@@ -12,4 +14,7 @@ function MainCtrl($scope, $location, UserComm, localStorageService) {
             });
     };
     $scope.$on('logout', $scope.logoutClicked);
+    $scope.$on('login', function (u) {
+        $scope.user = u;
+    });
 }
