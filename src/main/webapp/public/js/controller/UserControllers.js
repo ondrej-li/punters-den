@@ -1,7 +1,7 @@
-function LoginCtrl($scope, $location, User, localStorageService) {
+function LoginCtrl($scope, $location, UserComm, localStorageService) {
     $scope.login = {"username": "", "password": ""};
     $scope.loginClicked = function () {
-        User.login(
+        UserComm.login(
             {username: $scope.login.username, password: $scope.login.password},
             function (r) {
                 console.log('status:' + r.outcome);
@@ -11,5 +11,11 @@ function LoginCtrl($scope, $location, User, localStorageService) {
             function (r) {
                 console.error('error', r);
             });
+    };
+}
+
+function LogoutCtrl($scope, $location) {
+    $scope.logoutClicked = function () {
+        $scope.$emit('logout', []);
     };
 }
