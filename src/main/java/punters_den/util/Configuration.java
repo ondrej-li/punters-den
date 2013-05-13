@@ -8,9 +8,7 @@ public class Configuration {
     public static class ConfigurationHolder {
         private String databaseUsername;
         private String databasePassword;
-        private String databaseJdbcUrl;
-        private String datasourceClass;
-        
+        private String DatabaseJdbcUrl;
 
         public String getDatabaseUsername() {
             return databaseUsername;
@@ -29,19 +27,11 @@ public class Configuration {
         }
 
         public String getDatabaseJdbcUrl() {
-            return databaseJdbcUrl;
+            return DatabaseJdbcUrl;
         }
 
         public void setDatabaseJdbcUrl(String databaseJdbcUrl) {
-            this.databaseJdbcUrl = databaseJdbcUrl;
-        }
-        
-        public void setDatasourceClass (String datasourceClass) {
-            this.datasourceClass = datasourceClass;
-        }
-        
-        public String getDatasourceClass () {
-            return datasourceClass;
+            DatabaseJdbcUrl = databaseJdbcUrl;
         }
     }
 
@@ -57,22 +47,11 @@ public class Configuration {
             URI dbUri = new URI(System.getProperty("CLEARDB_DATABASE_URL", System.getenv("CLEARDB_DATABASE_URL")));
             holder.setDatabaseUsername(dbUri.getUserInfo().split(":")[0]);
             holder.setDatabasePassword(dbUri.getUserInfo().split(":")[1]);
-            holder.setDatabaseJdbcUrl(buildURL(dbUri));
-            holder.setDatasourceClass("h2".equalsIgnoreCase(dbUri.getScheme()) ? "org.h2.Driver" : "com.mysql.jdbc.Driver");
+            holder.setDatabaseJdbcUrl("jdbc:mysql://" + dbUri.getHost() + dbUri.getPath() + (dbUri.getQuery() != null ? "?" + dbUri.getQuery() : ""));
             return holder;
         } catch (URISyntaxException e) {
             return null;
         }
-    }
-    
-    private static String buildURL (URI dbUri) {
-        String url = "";
-        if ("h2".equalsIgnoreCase(dbUri.getScheme())) {
-            url = "jdbc:" + dbUri.getScheme() + ":mem:" + (dbUri.getQuery() != null ? "?" + dbUri.getQuery() : "") + ";MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE";
-        } else if ("mysql".equalsIgnoreCase(dbUri.getScheme() )) {
-            url = "jdbc:" + dbUri.getScheme() + "://" + dbUri.getHost() + dbUri.getPath() + (dbUri.getQuery() != null ? "?" + dbUri.getQuery() : "");
-        }
-        return url;
     }
 
     public static void resetConfiguration() {
@@ -91,10 +70,6 @@ public class Configuration {
         return currentConfiguration.getDatabaseJdbcUrl();
     }
 
-    public static String getDatasourceClass() {
-        return currentConfiguration.getDatasourceClass();
-    }
-
     public static void setDatabaseUsername(String username) {
         currentConfiguration.setDatabaseUsername(username);
     }
@@ -105,9 +80,5 @@ public class Configuration {
 
     public static void setDatabaseJdbcUrl(String url) {
         currentConfiguration.setDatabaseJdbcUrl(url);
-    }   
-
-    public static void setDatasourceClass(String datasourceClass) {
-        currentConfiguration.setDatasourceClass(datasourceClass);
-    }   
+    }
 }

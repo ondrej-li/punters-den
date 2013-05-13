@@ -16,7 +16,7 @@ public class Factory {
                     ((ComboPooledDataSource) DATA_SOURCE).setUser(Configuration.getDatabaseUsername());
                     ((ComboPooledDataSource) DATA_SOURCE).setPassword(Configuration.getDatabasePassword());
                     ((ComboPooledDataSource) DATA_SOURCE).setJdbcUrl(Configuration.getDatabaseJdbcUrl());
-                    ((ComboPooledDataSource) DATA_SOURCE).setDriverClass(Configuration.getDatasourceClass());
+                    ((ComboPooledDataSource) DATA_SOURCE).setDriverClass("com.mysql.jdbc.Driver");
                     ((ComboPooledDataSource) DATA_SOURCE).setMaxPoolSize(50);
                     ((ComboPooledDataSource) DATA_SOURCE).setMinPoolSize(5);
                     ((ComboPooledDataSource) DATA_SOURCE).setMinPoolSize(5);
