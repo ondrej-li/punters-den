@@ -1,23 +1,24 @@
 package punters_den.util;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class ConfigurationTest {
     @org.junit.Test
     public void testGetDatabaseUsername() throws Exception {
         Configuration.buildConfiguration();
-        assertEquals("punter_test", Configuration.getDatabaseUsername());
+        assertNotNull(Configuration.getDatabaseUsername());
     }
 
     @org.junit.Test
     public void testGetDatabasePassword() throws Exception {
         Configuration.buildConfiguration();
-        assertEquals("Janeka1974", Configuration.getDatabasePassword());
+        assertNotNull(Configuration.getDatabasePassword());
     }
 
     @org.junit.Test
     public void testGetDatabaseJdbcUrlWithQuery() throws Exception {
         Configuration.buildConfiguration();
-        assertEquals("jdbc:mysql://localhost/pd_test", Configuration.getDatabaseJdbcUrl());
+        assertTrue(Configuration.getDatabaseJdbcUrl().startsWith("jdbc:"));
     }
 }
