@@ -14,7 +14,6 @@
 (deftest formatted-now-ok
   (fact "now-test"
     (let [now (formatted-now)]
-      (pp/pprint now)
       (clojure.string/blank? now) => false)))
 
 (defn one-time-setup

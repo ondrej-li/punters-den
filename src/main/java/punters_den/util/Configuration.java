@@ -33,6 +33,15 @@ public class Configuration {
         public void setDatabaseJdbcUrl(String databaseJdbcUrl) {
             DatabaseJdbcUrl = databaseJdbcUrl;
         }
+
+        @Override
+        public String toString() {
+            return "ConfigurationHolder{" +
+                    "databaseUsername='" + databaseUsername + '\'' +
+                    ", databasePassword='" + databasePassword + '\'' +
+                    ", DatabaseJdbcUrl='" + DatabaseJdbcUrl + '\'' +
+                    '}';
+        }
     }
 
     private static ConfigurationHolder currentConfiguration;
@@ -48,6 +57,7 @@ public class Configuration {
             holder.setDatabaseUsername(dbUri.getUserInfo().split(":")[0]);
             holder.setDatabasePassword(dbUri.getUserInfo().split(":")[1]);
             holder.setDatabaseJdbcUrl("jdbc:mysql://" + dbUri.getHost() + dbUri.getPath() + (dbUri.getQuery() != null ? "?" + dbUri.getQuery() : ""));
+            System.out.println(holder.toString());
             return holder;
         } catch (URISyntaxException e) {
             return null;

@@ -190,8 +190,7 @@
                         <namespace>!simple.war</namespace>
                     </namespaces>
                     <replScript>start-jetty-server.clj</replScript>
-                    <clojureOptions>-DCLEARDB_DATABASE_URL=mysql://punter_test:Janeka1974@localhost/pd_test
-                    </clojureOptions>
+                    <clojureOptions>-DCLEARDB_DATABASE_URL=${CLEARDB_DATABASE_URL}</clojureOptions>
                 </configuration>
                 <executions>
                     <execution>
@@ -225,7 +224,7 @@
                 <version>2.14.1</version>
                 <configuration>
                     <environmentVariables>
-                        <CLEARDB_DATABASE_URL>mysql://punter_test:Janeka1974@localhost/pd_test</CLEARDB_DATABASE_URL>
+                        <CLEARDB_DATABASE_URL>${CLEARDB_DATABASE_URL}</CLEARDB_DATABASE_URL>
                     </environmentVariables>
                     <forkCount>3</forkCount>
                     <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>

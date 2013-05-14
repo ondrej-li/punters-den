@@ -20,6 +20,7 @@ public class Factory {
                     ((ComboPooledDataSource) DATA_SOURCE).setMaxPoolSize(50);
                     ((ComboPooledDataSource) DATA_SOURCE).setMinPoolSize(5);
                     ((ComboPooledDataSource) DATA_SOURCE).setMinPoolSize(5);
+                    testConnection();
                 }
             }
         }
@@ -29,5 +30,9 @@ public class Factory {
     public static void resetDataSource() {
         DATA_SOURCE = null;
         return;
+    }
+
+    private static void testConnection() throws Exception {
+        System.out.println(Factory.getDataSource().getConnection().getMetaData().getDatabaseProductName());
     }
 }
