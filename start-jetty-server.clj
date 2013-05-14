@@ -14,7 +14,7 @@
   (add-dependencies :coordinates dep
     :repositories (merge cemerick.pomegranate.aether/maven-central {"clojars" "http://clojars.org/repo"})))
 
-(def log-file (.getAbsolutePath (io/file (io/resource "src/main/resources/log4j-config.xml"))))
+(def log-file (.getAbsolutePath (io/file (io/resource "src/main/resources/log4j.xml"))))
 
 (org.springframework.util.Log4jConfigurer/initLogging log-file 20000)
 
