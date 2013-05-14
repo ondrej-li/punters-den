@@ -168,9 +168,10 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.0.3.v20130506</version>
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <war>${build.outputDirectory}/../${build.finalName}</war>
+                    <war>${project.build.outputDirectory}/../${project.build.finalName}</war>
                     <httpConnector>
                         <port>5000</port>
                     </httpConnector>
@@ -190,7 +191,8 @@
                         <namespace>!simple.war</namespace>
                     </namespaces>
                     <replScript>start-jetty-server.clj</replScript>
-                    <clojureOptions>-DCLEARDB_DATABASE_URL=${CLEARDB_DATABASE_URL}</clojureOptions>
+                    <clojureOptions>-DCLEARDB_DATABASE_URL=mysql://punter_test:Janeka1974@localhost/pd_test
+                    </clojureOptions>
                 </configuration>
                 <executions>
                     <execution>
@@ -224,7 +226,7 @@
                 <version>2.14.1</version>
                 <configuration>
                     <environmentVariables>
-                        <CLEARDB_DATABASE_URL>${CLEARDB_DATABASE_URL}</CLEARDB_DATABASE_URL>
+                        <CLEARDB_DATABASE_URL>mysql://punter_test:Janeka1974@localhost/pd_test</CLEARDB_DATABASE_URL>
                     </environmentVariables>
                     <forkCount>3</forkCount>
                     <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
@@ -244,7 +246,7 @@
                     <email>ondrej.linek@gmail.com</email>
                     <password>janeka</password>
                     <context>ROOT</context>
-                    <environment>punters-den</environment>
+                    <environment>pd-test</environment>
                     <api_hoster>app.j.layershift.co.uk</api_hoster>
                 </configuration>
             </plugin>
