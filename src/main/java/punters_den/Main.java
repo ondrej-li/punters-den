@@ -1,5 +1,6 @@
 package punters_den;
 
+import punters_den.user.UserService;
 import punters_den.util.Configuration;
 import punters_den.util.DatabaseFactory;
 import punters_den.util.FlywayService;
@@ -12,6 +13,7 @@ public class Main {
         setPort(System.getenv("PORT") != null ? Integer.parseInt(System.getenv("PORT")) : 5000);
         initializeDatabase();
         staticFileLocation("/content");
+        new UserService().addRoutes();
     }
 
     private static void initializeDatabase() throws Exception {

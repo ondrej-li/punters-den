@@ -56,6 +56,7 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-security:9.0.0.v20130308" level="project" />
     <orderEntry type="library" name="Maven: commons-dbutils:commons-dbutils:1.5" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.12" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" level="project" />
   </component>
 </module>
 
