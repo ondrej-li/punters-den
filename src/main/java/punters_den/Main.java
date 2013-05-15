@@ -1,7 +1,7 @@
 package punters_den;
 
 import punters_den.util.Configuration;
-import punters_den.util.Factory;
+import punters_den.util.DatabaseFactory;
 import punters_den.util.FlywayService;
 
 import static spark.Spark.setPort;
@@ -16,7 +16,7 @@ public class Main {
 
     private static void initializeDatabase() throws Exception {
         Configuration.resetConfiguration();
-        Factory.resetDataSource();
-        FlywayService.initializeDatabase(Factory.getDataSource(), null);
+        DatabaseFactory.resetDataSource();
+        FlywayService.initializeDatabase(DatabaseFactory.getDataSource(), null);
     }
 }

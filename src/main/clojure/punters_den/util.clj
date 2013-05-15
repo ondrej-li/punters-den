@@ -1,4 +1,5 @@
 (ns punters-den.util
+  (:import [punters_den.util DatabaseFactory DatabaseFactory DatabaseFactory])
   (:use ring.util.response)
   (:use [clojure.tools.logging :only [info error]])
   (:require [clojure.java.jdbc :as sql])

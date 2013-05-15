@@ -1,4 +1,5 @@
 (ns punters-den.user
+  (:import [punters_den.util DatabaseFactory DatabaseFactory DatabaseFactory])
   (:use compojure.core)
   (:use [clojure.tools.logging :only [info error]])
   (:use [clojure.contrib.core :only [dissoc-in]])

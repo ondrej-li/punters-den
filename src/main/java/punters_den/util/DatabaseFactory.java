@@ -4,13 +4,13 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import javax.sql.DataSource;
 
-public class Factory {
+public class DatabaseFactory {
     private static volatile DataSource DATA_SOURCE;
 
 
     public static DataSource getDataSource() throws Exception {
         if (DATA_SOURCE == null) {
-            synchronized (Factory.class) {
+            synchronized (DatabaseFactory.class) {
                 if (DATA_SOURCE == null) {
                     DATA_SOURCE = new ComboPooledDataSource();
                     ((ComboPooledDataSource) DATA_SOURCE).setUser(Configuration.getDatabaseUsername());
@@ -33,6 +33,6 @@ public class Factory {
     }
 
     private static void testConnection() throws Exception {
-        System.out.println(Factory.getDataSource().getConnection().getMetaData().getDatabaseProductName());
+        System.out.println(DatabaseFactory.getDataSource().getConnection().getMetaData().getDatabaseProductName());
     }
 }
