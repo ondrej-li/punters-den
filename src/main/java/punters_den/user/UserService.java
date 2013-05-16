@@ -1,23 +1,48 @@
 package punters_den.user;
 
+import punters_den.db.DB;
+import punters_den.web.Jesponse;
+import punters_den.web.Joute;
 import spark.Request;
-import spark.Response;
-import spark.Route;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 import static spark.Spark.get;
 
 public class UserService {
     public void addRoutes() {
-        get(new Route("/user/:username/login") {
+        System.out.println("adding user routes");
+        get(new Joute("/api/user/:username/login") {
             @Override
-            public Object handle(Request request, Response response) {
-                return "";
+            public void handle(Request request, Jesponse jesponse) throws Exception {
+                final List<User> users = DB.query("select * from user where username = ? and password = ?", Arrays.asList(request.params(":username"), request.raw().getParameter("password")), User.class);
+                if (users != null && users.size() > 0) {
+                    final String authKey = UUID.randomUUID().toString();
+                    DB.update("user", new HashMap<String, Object>() {{
+                                put("auth_key", authKey);
+                            }}, new HashMap<String, Object>() {{
+                                put("id", users.get(0).getId());
+                            }}
+                    );
+                    jesponse.addData("user", users.get(0));
+                    jesponse.addData("auth-key", authKey);
+                } else {
+                    throw new RuntimeException("user not found");
+                }
             }
         });
-        get(new Route("/user/:username/logout") {
+        get(new Joute("/api/user/:username/logout") {
             @Override
-            public Object handle(Request request, Response response) {
-                return "";
+            public void handle(final Request request, Jesponse jesponse) throws Exception {
+                DB.update("user", new HashMap<String, Object>() {{
+                            put("auth_key", null);
+                        }}, new HashMap<String, Object>() {{
+                            put("auth_key", request.cookie("auth-key"));
+                        }}
+                );
             }
         });
     }

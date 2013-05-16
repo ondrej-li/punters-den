@@ -4,7 +4,7 @@ function LoginCtrl($scope, $location, UserComm, localStorageService) {
         UserComm.login(
             {username: $scope.login.username, password: $scope.login.password},
             function (r) {
-                console.log('status:' + r.outcome);
+                console.log('status:' + r.status);
                 localStorageService.cookie.add('auth-key', r['auth-key']);
                 $scope.$emit('login', [r]);
                 $location.url('/');

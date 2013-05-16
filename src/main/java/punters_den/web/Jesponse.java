@@ -1,46 +1,56 @@
 package punters_den.web;
 
-import spark.Request;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 import spark.Response;
-import spark.Route;
-import java.util.Map;
-import java.util.HashMap;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Jesponse {
-    private Map <String, ?> data;
+    static Logger logger = Logger.getLogger(Jesponse.class);
+    private Map<String, Object> json;
     private Response response;
-    
-    public Jesponse (Response response) {
-        data = new HashMap<String, ?>();        
+
+    public Jesponse(Response response) {
+        json = new HashMap<String, Object>();
         this.response = response;
     }
-    
+
     public Response getResponse() {
         return response;
     }
-    
+
     public HttpServletResponse raw() {
         return response.raw();
     }
-    
-    public void status (int status) {
+
+    public void status(int status) {
         response.status(status);
     }
-    
+
     public void addData(String key, Object value) {
-        data.put(key, value);
+        json.put(key, value);
     }
-    
+
     public Object removeData(String key) {
-        return data.remove(key);
+        return json.remove(key);
     }
-    
-    public Response toResponse() {
+
+    public String toResponse() {
         ObjectMapper mapper = new ObjectMapper();
         StringWriter writer = new StringWriter();
-        mapper.writeValue(writer userInMap);
-        response.body(writer.toString());
-        return response;
-    }    
+        try {
+            mapper.writeValue(writer, json);
+            response.body(writer.toString());
+        } catch (IOException e) {
+            logger.error("Error writing json", e);
+            response.status(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.body("{\"status\":\"error\",\"statusMessage\":\"Error generating JSON\"}");
+        }
+        return writer.toString();
+    }
 }

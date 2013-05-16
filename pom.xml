@@ -45,14 +45,14 @@
             <version>1.5</version>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-core-asl</artifactId>
-            <version>1.9.12</version>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.2.1</version>
         </dependency>
     </dependencies>
     <repositories>
@@ -142,6 +142,24 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-Xms512m</argument>
+                        <argument>-Xmx512m</argument>
+                        <argument>-XX:NewRatio=3</argument>
+                        <argument>-XX:+PrintGCTimeStamps</argument>
+                        <argument>-XX:+PrintGCDetails</argument>
+                        <argument>-Xdebug</argument>
+                        <argument>-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005</argument>
+                    </arguments>
+                    <commandlineArgs>-jar target/${project.build.finalName}.jar</commandlineArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>
