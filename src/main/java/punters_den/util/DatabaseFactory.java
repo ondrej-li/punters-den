@@ -20,8 +20,8 @@ public class DatabaseFactory {
                     ((ComboPooledDataSource) DATA_SOURCE).setDriverClass("com.mysql.jdbc.Driver");
                     ((ComboPooledDataSource) DATA_SOURCE).setMaxPoolSize(50);
                     ((ComboPooledDataSource) DATA_SOURCE).setMinPoolSize(5);
-                    ((ComboPooledDataSource) DATA_SOURCE).setMaxIdleTimeExcessConnections(1800);
-                    ((ComboPooledDataSource) DATA_SOURCE).setMaxIdleTime(1800);
+                    ((ComboPooledDataSource) DATA_SOURCE).setMaxIdleTimeExcessConnections(60);
+                    ((ComboPooledDataSource) DATA_SOURCE).setMaxIdleTime(60);
                     ((ComboPooledDataSource) DATA_SOURCE).setMaxConnectionAge(3600);
                     testConnection();
                 }
