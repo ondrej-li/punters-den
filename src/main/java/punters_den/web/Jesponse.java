@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Jesponse {
-    static Logger logger = Logger.getLogger(Jesponse.class);
+    private static Logger logger = Logger.getLogger(Jesponse.class);
     private Map<String, Object> json;
     private Response response;
 

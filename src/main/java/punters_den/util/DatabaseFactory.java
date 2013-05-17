@@ -3,10 +3,11 @@ package punters_den.util;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import javax.sql.DataSource;
+import org.apache.log4j.Logger;
 
 public class DatabaseFactory {
     private static volatile DataSource DATA_SOURCE;
-
+    private static Logger logger = Logger.getLogger(DatabaseFactory.class);
 
     public static DataSource getDataSource() throws Exception {
         if (DATA_SOURCE == null) {
@@ -19,7 +20,9 @@ public class DatabaseFactory {
                     ((ComboPooledDataSource) DATA_SOURCE).setDriverClass("com.mysql.jdbc.Driver");
                     ((ComboPooledDataSource) DATA_SOURCE).setMaxPoolSize(50);
                     ((ComboPooledDataSource) DATA_SOURCE).setMinPoolSize(5);
-                    ((ComboPooledDataSource) DATA_SOURCE).setMinPoolSize(5);
+                    ((ComboPooledDataSource) DATA_SOURCE).setMaxIdleTimeExcessConnections(1800);
+                    ((ComboPooledDataSource) DATA_SOURCE).setMaxIdleTime(1800);
+                    ((ComboPooledDataSource) DATA_SOURCE).setMaxConnectionAge(3600);
                     testConnection();
                 }
             }
@@ -33,6 +36,6 @@ public class DatabaseFactory {
     }
 
     private static void testConnection() throws Exception {
-        System.out.println(DatabaseFactory.getDataSource().getConnection().getMetaData().getDatabaseProductName());
+        logger.info("Connection DB:" + DatabaseFactory.getDataSource().getConnection().getMetaData().getDatabaseProductName());
     }
 }

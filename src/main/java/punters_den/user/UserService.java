@@ -14,7 +14,6 @@ import static spark.Spark.get;
 
 public class UserService {
     public void addRoutes() {
-        System.out.println("adding user routes");
         get(new Joute("/api/user/:username/login") {
             @Override
             public void handle(Request request, Jesponse jesponse) throws Exception {
