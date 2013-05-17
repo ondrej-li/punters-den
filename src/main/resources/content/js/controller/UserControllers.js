@@ -16,7 +16,5 @@ function LoginCtrl($scope, $location, UserComm, localStorageService) {
 }
 
 function LogoutCtrl($scope, $location) {
-    $scope.logoutClicked = function () {
-        $scope.$emit('logout', []);
-    };
+    $scope.$emit('logout', []);
 }
