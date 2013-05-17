@@ -14,7 +14,7 @@ function MainCtrl($scope, $location, UserComm, localStorageService) {
             });
     };
     $scope.$on('logout', $scope.logoutClicked);
-    $scope.$on('login', function (u) {
-        $scope.user = u.user;
+    $scope.$on('login', function (u, data) {
+        $scope.user = data[0].user;
     });
 }
