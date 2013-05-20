@@ -7,7 +7,6 @@ function MainCtrl($scope, $location, UserComm, localStorageService) {
                 console.log('status:' + r.status);
                 $scope.user = null;
                 localStorageService.cookie.remove('auth-key');
-                $location.url("/");
             },
             function (r) {
                 console.error('error', r);
