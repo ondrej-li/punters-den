@@ -27,6 +27,8 @@ create table team (
    name         varchar(255) not null,
    description  varchar(255) not null,
    country_id   numeric      not null,
+   user_created char(1)      not null default 'N',
+   created_by   numeric      null,
    primary key (id)
 );
 
@@ -50,17 +52,18 @@ create table match (
    primary key (id)
 );
 create table standing (
-   id            numeric    not null auto_increment,
-   created_date  timestamp  null default current_timestamp,
-   updated_date  timestamp  null,
-   league_id     numeric    not null,
-   team_id       numeric    not null,
-   points        numeric(5) not null,
-   wins          numeric(5) not null,
-   losses        numeric(5) not null,
-   draws         numeric(5) not null,
-   goals_given   numeric(6) not null,
-   goal_received numeric(6) not null,
+   id             numeric    not null auto_increment,
+   created_date   timestamp  null default current_timestamp,
+   updated_date   timestamp  null,
+   season         timestamp,
+   league_id      numeric    not null,
+   team_id        numeric    not null,
+   points         numeric(5) not null,
+   wins           numeric(5) not null,
+   losses         numeric(5) not null,
+   draws          numeric(5) not null,
+   goals_given    numeric(6) not null,
+   goals_received numeric(6) not null,
    primary key (id)
 
 )
